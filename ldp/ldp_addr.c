@@ -32,7 +32,7 @@ ldp_addr *ldp_addr_create(ldp_global *g, mpls_inet_addr * address)
 {
   ldp_addr *a = (ldp_addr *) mpls_malloc(sizeof(ldp_addr));
 
-  LDP_ENTER(g->user_data, "ldp_addr_create: 0x%08x", address->u.ipv4);
+  LDP_ENTER(g->user_data, "ldp_addr_create: %s", inet_ntoa(htonl(address->u.ipv4)));
   if (a) {
    /*
     * note: this is init to 1 for a reason!
@@ -74,7 +74,7 @@ ldp_addr *ldp_addr_find(ldp_global *g, mpls_inet_addr * address)
 {
   ldp_addr *addr = NULL;
 
-  LDP_ENTER(g->user_data, "ldp_addr_find: 0x%08x", address->u.ipv4);
+  LDP_ENTER(g->user_data, "ldp_addr_find: %s", inet_ntoa(htonl(address->u.ipv4)));
   if (mpls_tree_get(g->addr_tree, address->u.ipv4, 32, (void **)&addr) !=
     MPLS_SUCCESS) {
     LDP_EXIT(g->user_data, "ldp_addr_find: NULL");

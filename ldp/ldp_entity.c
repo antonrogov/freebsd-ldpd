@@ -80,7 +80,7 @@ ldp_entity *ldp_entity_create()
 
 void ldp_entity_delete(ldp_entity * e)
 {
-  LDP_PRINT(NULL, "entity delete %p", e);
+  LDP_PRINT(NULL, "entity delete %p\n", e);
   MPLS_REFCNT_ASSERT(e, 0);
   mpls_free(e);
 }

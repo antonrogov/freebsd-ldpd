@@ -119,7 +119,7 @@ void mpls_disable_interface(const char *name)
 /* mpls_get_label_by_prefix */
 int32_t mpls_get_label_by_prefix(struct in_addr *prefix_in, int length)
 {
-  printf("MPLS GET LABEL %s/%i\n", inet_ntoa(prefix_in), length);
+  printf("MPLS GET LABEL %s/%i\n", inet_ntoa(prefix_in->s_addr), length);
   return 0;
 }
 
@@ -127,7 +127,7 @@ int32_t mpls_get_label_by_prefix(struct in_addr *prefix_in, int length)
 /* mpls_add_local: adds an ILM entry */
 void mpls_add_local(int32_t label, struct in_addr *prefix, int length)
 {
-  printf("MPLS ADD LOCAL %i %s/%i\n", label, inet_ntoa(prefix), length);
+  printf("MPLS ADD LOCAL %i %s/%i\n", label, inet_ntoa(prefix->s_addr), length);
 }
 
 
@@ -141,14 +141,14 @@ void mpls_delete_local(int32_t label)
 /* mpls_add_remote: adds a NHLFE entry */
 void mpls_add_remote(int32_t label, struct in_addr *prefix, int length, const char *ifname, struct in_addr *nexthop)
 {
-  printf("MPLS ADD REMOTE %i %s/%i %s %s\n", label, inet_ntoa(prefix), length, ifname, inet_ntoa(nexthop));
+  printf("MPLS ADD REMOTE %i %s/%i %s %s\n", label, inet_ntoa(prefix->s_addr), length, ifname, inet_ntoa(nexthop));
 }
 
 
 /* mpls_remove_remote: removes a NHLFE entry */
 void mpls_remove_remote(int32_t label, struct in_addr *prefix, int length, const char *ifname, struct in_addr *nexthop)
 {
-  printf("MPLS DEL REMOTE %i %s/%i %s %s\n", label, inet_ntoa(prefix), length, ifname, inet_ntoa(nexthop));
+  printf("MPLS DEL REMOTE %i %s/%i %s %s\n", label, inet_ntoa(prefix->s_addr), length, ifname, inet_ntoa(nexthop));
 }
 
 
@@ -169,7 +169,7 @@ void mpls_delete_xc(int local, int remote)
 /* mpls_add_vpn: adds a VPN entry */
 void mpls_add_vpn(int type, const char *ifname, struct in_addr *destination, int32_t label)
 {
-  printf("MPLS ADD VPN %i %i %s %s\n", label, type, ifname, inet_ntoa(destination));
+  printf("MPLS ADD VPN %i %i %s %s\n", label, type, ifname, inet_ntoa(destination->s_addr));
 }
 
 

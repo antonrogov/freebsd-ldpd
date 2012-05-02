@@ -62,7 +62,7 @@ static mpls_return_enum ldp_fec_insert(ldp_global *g, ldp_fec * fec)
       MPLS_ASSERT(0);
   }
 
-  LDP_PRINT(g->user_data, "ldp_fec_insert: 0x%08x/%d\n", key, len);
+  LDP_PRINT(g->user_data, "ldp_fec_insert: %s/%d\n", inet_ntoa(htonl(key)), len);
 
   if (mpls_tree_insert(g->fec_tree, key, len, (void *)fec) != MPLS_SUCCESS) {
     LDP_PRINT(g->user_data, "ldp_fec_insert: error adding fec\n");
@@ -99,7 +99,7 @@ static void ldp_fec_remove(ldp_global *g, mpls_fec *fec)
       MPLS_ASSERT(0);
   }
 
-  LDP_PRINT(g->user_data, "ldp_fec_remove: 0x%08x/%d\n", key, len);
+  LDP_PRINT(g->user_data, "ldp_fec_remove: %s/%d\n", inet_ntoa(htonl(key)), len);
   mpls_tree_remove(g->fec_tree, key, len, (void **)&f);
 
   MPLS_ASSERT(f);
@@ -158,8 +158,8 @@ ldp_fec *ldp_fec_create(ldp_global *g, mpls_fec *f)
 
 void ldp_fec_delete(ldp_global *g, ldp_fec * fec)
 {
-  LDP_PRINT(g->user_data, "fec delete: %08x/%d",
-    fec->info.u.prefix.network.u.ipv4, fec->info.u.prefix.length);
+  LDP_PRINT(g->user_data, "fec delete: %s/%d\n",
+    inet_ntoa(htonl(fec->info.u.prefix.network.u.ipv4)), fec->info.u.prefix.length);
   ldp_fec_remove(g, &fec->info);
   _ldp_global_del_fec(g, fec);
   mpls_free(fec);
@@ -189,7 +189,7 @@ ldp_fec *ldp_fec_find(ldp_global *g, mpls_fec *fec)
       MPLS_ASSERT(0);
   }
 
-  LDP_PRINT(g->user_data, "ldp_fec_find: 0x%08x/%d\n", key, len);
+  LDP_PRINT(g->user_data, "ldp_fec_find: %s/%d\n", inet_ntoa(htonl(key)), len);
   if (mpls_tree_get(g->fec_tree, key, len, (void **)&f) != MPLS_SUCCESS) {
     return NULL;
   }

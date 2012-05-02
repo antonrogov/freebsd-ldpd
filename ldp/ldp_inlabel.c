@@ -183,7 +183,6 @@ void _ldp_inlabel_del_attr(ldp_global *g, ldp_inlabel * i, ldp_attr * a)
   mpls_link_list_remove_data(&i->attr_root, a);
   MPLS_REFCNT_RELEASE2(g, a, ldp_attr_delete);
   i->reuse_count--;
-  printf("_ldp_inlabel_del_attr\n");
 }
 
 mpls_return_enum _ldp_inlabel_add_session(ldp_inlabel * i, ldp_session * s)

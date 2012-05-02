@@ -56,7 +56,7 @@ ldp_nexthop *ldp_nexthop_for_fec_session(ldp_fec *fec, ldp_session *s)
 
 void ldp_nexthop_delete(ldp_global *g, ldp_nexthop *nh)
 {
-  LDP_PRINT(g->user_data, "nexthop delete: %p", nh);
+  LDP_PRINT(g->user_data, "nexthop delete: %p\n", nh);
   MPLS_REFCNT_ASSERT(nh, 0);
 
   if (nh->addr) {

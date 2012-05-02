@@ -430,8 +430,6 @@ void ldp_label_mapping_initial_callback(mpls_timer_handle timer, void *extra,
   LDP_TRACE_LOG(g->user_data, MPLS_TRACE_STATE_ALL, LDP_TRACE_FLAG_TIMER,
     "Initial Label Mapping fired: session(%d)\n", s->index);
 
-  printf("Initial Label Mapping started\n");
-
   mpls_lock_get(g->global_lock);
 
   mpls_timer_stop(g->timer_handle, timer);
@@ -542,8 +540,6 @@ ldp_label_mapping_initial_callback_end_nh:
 
   mpls_lock_release(g->global_lock);
 
-  printf("Initial Label Mapping finished\n");
-
   LDP_EXIT(g->user_data, "ldp_label_mapping_initial_callback");
 }
 
@@ -569,13 +565,11 @@ mpls_return_enum ldp_label_mapping_send(ldp_global * g, ldp_session * s,
   if (existing) {
     LDP_TRACE_LOG(g->user_data, MPLS_TRACE_STATE_ALL, LDP_TRACE_FLAG_BINDING,
       "Using an existing label\n");
-	printf("Using an existing label\n");
     in = existing->inlabel;
     ldp_attr_add_inlabel(g, us_attr, in);
   } else {
     LDP_TRACE_LOG(g->user_data, MPLS_TRACE_STATE_ALL, LDP_TRACE_FLAG_BINDING,
       "Generating a label\n");
-	printf("Generating a label\n");
     in = ldp_inlabel_create_complete(g, s, us_attr, f);
   }
 
@@ -716,6 +710,12 @@ mpls_return_enum ldp_label_mapping_process(ldp_global * g, ldp_session * s,
     s->session_name,
     r_attr->fecTlv.fecElArray[0].addressEl.address,
     r_attr->fecTlv.fecElArray[0].addressEl.preLen);
+
+  printf("Label Mapping Recv from %s: %d for %s/%d\n",
+          s->session_name,
+          r_attr->genLblTlv.label,
+          inet_ntoa(htonl(r_attr->fecTlv.fecElArray[0].addressEl.address)),
+          r_attr->fecTlv.fecElArray[0].addressEl.preLen);
 
   if ((ds_attr = ldp_attr_find_downstream_state2(g, s, f,
         LDP_LSP_STATE_REQ_SENT)) != NULL) { /* LMp.1 */
