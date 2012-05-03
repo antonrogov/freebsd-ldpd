@@ -592,7 +592,7 @@ static void Config_SaveInterface(FILE *file, interface_t *iface)
 
 void Config_Save()
 {
-/*	FILE *file;
+	FILE *file;
 	interface_t *iface;
 
 	file = fopen(config, "w");
@@ -605,5 +605,4 @@ void Config_Save()
 		Config_SaveInterface(file, iface);
 
 	fclose(file);
-*/
 }

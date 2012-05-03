@@ -10,7 +10,6 @@
 #ifndef _MPLS_LIST_H_
 #define _MPLS_LIST_H_
 
-#include <string.h>
 #include "mpls_mm_impl.h"
 
 /* Endo list, the prev,next ptrs are part of the element in the list */

@@ -1,5 +1,5 @@
 #include "ldpd.h"
-/*#include "../ng_mpls/public.h"*/
+#include "../ng_mpls/public.h"
 
 static void PrintAddress(in_addr_t ina)
 {
@@ -44,7 +44,7 @@ mpls_return_enum mpls_mpls_insegment_add(mpls_mpls_handle handle, mpls_insegment
 		in->label.type = MPLS_LABEL_TYPE_GENERIC;
 		if(ldp->implicitNull == MPLS_BOOL_TRUE && in->npop == -1) {
 			/* Implicit NULL */
-			in->label.u.gen = 3;/*MPLS_IMPLICIT_NULL;*/
+			in->label.u.gen = MPLS_IMPLICIT_NULL;
 		} else {
 			/* Allocate new */
 			in->label.u.gen = mpls_alloc_label();
@@ -65,7 +65,7 @@ void mpls_mpls_insegment_del(mpls_mpls_handle handle, mpls_insegment *in)
 
 mpls_return_enum mpls_mpls_xconnect_add(mpls_mpls_handle handle, mpls_insegment *in, mpls_outsegment *out)
 {
-	mpls_add_xc(in->label.u.gen, out->label.u.gen);
+	/* mpls_add_xc(in->label.u.gen, out->label.u.gen);*/
 
 	return MPLS_SUCCESS;
 }
@@ -73,7 +73,7 @@ mpls_return_enum mpls_mpls_xconnect_add(mpls_mpls_handle handle, mpls_insegment 
 
 void mpls_mpls_xconnect_del(mpls_mpls_handle handle, mpls_insegment *in, mpls_outsegment *out)
 {
-	mpls_delete_xc(in->label.u.gen, out->label.u.gen);
+	/* mpls_delete_xc(in->label.u.gen, out->label.u.gen);*/
 }
 
 
